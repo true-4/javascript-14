@@ -23,3 +23,44 @@ Promise.all([ // запускает все запросы одновременн
 // Условие:
 //  Запусти одновременно три запроса на один и тот же URL https://jsonplaceholder.typicode.com/posts/{id} с разными id. Выведи в консоль общее время выполнения и массив постов.
 
+// Promise.all([
+//   fetch('https://jsonplaceholder.typicode.com/posts/{id1}'),
+//   fetch('https://jsonplaceholder.typicode.com/posts/{id2}'),
+//   fetch('https://jsonplaceholder.typicode.com/posts/{id3}')
+// ]).then(res => console.log(res))
+
+
+
+// 🔸 Задачи по микрозадачам / Event Loop
+
+// 🧠 Задача 5: В каком порядке выведется?
+// Условие:
+// console.log('A'); -> 1
+
+// setTimeout(() => {
+//     console.log('B'); -> 4
+// }, 0);
+
+// Promise.resolve().then(() => {
+//     console.log('C'); -> 3
+// });
+
+// console.log('D'); -> 2
+
+
+
+// 🧠 Задача 6: Сколько раз выполнится then?
+// const p = new Promise((resolve) => {
+//     resolve("ok");
+//     resolve("still ok"); // вторая игнорируется
+// });
+
+// p.then(console.log);
+
+
+
+// 🧠 Задача 7: Как сделать, чтобы console.log(3) был первым?
+
+// setTimeout(() => console.log(1));
+// Promise.resolve().then(() => console.log(2));
+// console.log(3);
