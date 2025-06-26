@@ -62,6 +62,8 @@ Promise.all([ // запускает все запросы одновременн
 
 // 🧠 Задача 7: Как сделать, чтобы console.log(3) был первым?
 
-// setTimeout(() => console.log(1));
-// Promise.resolve().then(() => console.log(2));
-// console.log(3);
+// setTimeout(() => console.log(1)); -> 3
+// Promise.resolve().then(() => console.log(2)); -> 2
+// console.log(3); -> 1
+
+// Он и так первый так как он в мейне. Промис второй так как он миеротакска. Таймаут последний так как макротаска
