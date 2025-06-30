@@ -17,7 +17,7 @@ Promise.all([ // запускает все запросы одновременн
     todosCount: todos.length
   };
   console.log(result);
-})
+}).catch(e => console.error('Ошибка', e))
 
 // ✅ Задача 2: Проверка скорости API
 // Условие:
@@ -28,6 +28,20 @@ Promise.all([ // запускает все запросы одновременн
 //   fetch('https://jsonplaceholder.typicode.com/posts/{id2}'),
 //   fetch('https://jsonplaceholder.typicode.com/posts/{id3}')
 // ]).then(res => console.log(res))
+
+// 🔹 Задача на Promise.race
+// 🏁 Задача 3: Таймаут запроса
+// Условие:
+//  Сделай запрос на https://jsonplaceholder.typicode.com/comments, но если он не ответит за 2 секунды — прерви с сообщением "Превышено время ожидания"
+
+const getRequest = fetch('https://jsonplaceholder.typicode.com/comments') // присваиваю запрос в переменную
+const timer = new Promise((res, rej) => {
+  setTimeout(() => {
+    rej(new Error('Превышено время ожидания'))
+  }, 2000)
+})
+
+Promise.race([getRequest, timer])
 
 
 
