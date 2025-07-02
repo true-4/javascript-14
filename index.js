@@ -23,11 +23,20 @@ Promise.all([ // запускает все запросы одновременн
 // Условие:
 //  Запусти одновременно три запроса на один и тот же URL https://jsonplaceholder.typicode.com/posts/{id} с разными id. Выведи в консоль общее время выполнения и массив постов.
 
-// Promise.all([
-//   fetch('https://jsonplaceholder.typicode.com/posts/{id1}'),
-//   fetch('https://jsonplaceholder.typicode.com/posts/{id2}'),
-//   fetch('https://jsonplaceholder.typicode.com/posts/{id3}')
-// ]).then(res => console.log(res))
+// КОД ВРОДЕ РАБОТАЕТ, НО НЕ МОГУ НАЙТИ НОРМАЛЮНУЮ URLку
+// const idCounts = [1, 2, 3] // идентификаторы для каждого запроса (повторяющегося)
+// const startTimer = performance.now() // запуск таймера 1
+// const controls = (id) => { // функция для получения id
+//   const urlAddress = `https://jsonplaceholder.typicode.com/comments/${id}` // присваиваем переменной адрес передавая id
+//   return fetch(urlAddress).then(res => res.json()) // возвращаем промис с данными
+// }
+
+// Promise.all(idCounts.map(item => controls(item))).then(result => { // проходимся мапом по элементам массива получаем коллекцию адресов с id
+//   const finishTimer = performance.now() // запускаем 2 таймер
+//   const differenceTimers = finishTimer - startTimer // присваиваем разницу первого и последнего таймера в новую переменную
+//   console.log(`общее время выполнения ${differenceTimers}`)
+//   console.log(`массив постов ${result}`)
+// }).catch(error => console.error(`error on ${error}`))
 
 // 🔹 Задача на Promise.race
 // 🏁 Задача 3: Таймаут запроса
@@ -41,7 +50,9 @@ const timer = new Promise((res, rej) => {
   }, 2000)
 })
 
-Promise.race([getRequest, timer])
+Promise.race([getRequest, timer]).then(time => {
+  console.log('Time: ', time)
+}).catch(er => console.error(er))
 
 
 
