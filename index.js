@@ -55,6 +55,43 @@ Promise.race([getRequest, timer]).then(time => {
 }).catch(er => console.error(er))
 
 
+// 🔹 Задача на Promise.allSettled
+// 📊 Задача 4: Статус всех внешних запросов
+// Условие:
+//  Сделай три запроса:
+// один — на корректный URL
+// второй — на несуществующий
+// третий — на неправильный домен
+//  Покажи массив из объектов с результатами: статус, fulfilled/rejected, и причина/данные.
+// [
+//   { status: "fulfilled", value: ... },
+//   { status: "rejected", reason: ... },
+//   ...
+// ]
+
+const relevant = fetch('https://jsonplaceholder.typicode.com/posts/1')
+const noRelevant = fetch('https://jsonplaceholder.typicode.com/doesnotexist')
+const invalid = fetch('https://invalid.domain.example')
+
+// решил не сам, но уже просто очень много времени сижу над таской
+Promise.allSettled([relevant, noRelevant, invalid]).then(results => {
+  const formattedResults = results.map((result, index) => {
+    if (result.status === 'fulfilled') {
+      return {
+        status: result.status,
+        value: result.value.status === 200 ? 'Успешно получены данные' : `Статус ответа: ${result.value.status}`,
+      }
+    } else {
+      return {
+        status: result.status,
+        reason: result.reason.message,
+      }
+    }
+  })
+  console.log(formattedResults);
+})
+
+// работа с Promise для мня тёмный лес не понимаю ничего
 
 // 🔸 Задачи по микрозадачам / Event Loop
 
